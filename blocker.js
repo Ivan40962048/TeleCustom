@@ -1,5 +1,5 @@
 function removeElements() {
-	chatIdsForRemove = ["957483527", "1741221590", "5652056591"];
+	chatIdsForRemove = ["957483527", "1741221590", "5652056591", "504667562"];
 	let chats = document.querySelector("#folders-container > div > div.chatlist-top > ul").childNodes;
 	let searchedChat;
 	for (let i = 0; i < chats.length; i++) {
@@ -17,4 +17,11 @@ function removeElements() {
 	}
 }
 
-setTimeout(removeElements, 3000);
+const checkElement = async selector => {
+	while (document.querySelector(selector) === null){
+		await new Promise(resolve => requestAnimationFrame(resolve))
+	}
+	return document.querySelector(selector);
+}
+
+checkElement("#folders-container > div > div.chatlist-top > ul > a:nth-child(3) > div.c-ripple").then((selector) => removeElements())
