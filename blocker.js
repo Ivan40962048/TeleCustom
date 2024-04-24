@@ -1,12 +1,13 @@
-function removeElements() {
-	chatIdsForRemove = ["957483527", "1741221590", "5652056591", "504667562"];
+function run(){
 	let chats = document.querySelector("#folders-container > div > div.chatlist-top > ul").childNodes;
+	removeChatPreviews(chats);
+	changeChatAvatars(chats);
+}
+
+function removeChatPreviews(chats) {
+	chatIdsForRemove = ["957483527", "1741221590", "5652056591", "504667562"];
 	let searchedChat;
 	for (let i = 0; i < chats.length; i++) {
-		let chatImages = chats[i].getElementsByTagName("img");
-		if (chatImages.length > 0)
-			chatImages[chatImages.length - 1].src = "https://i.pinimg.com/736x/a2/4d/d9/a24dd913965b66c8ff68d53cf899ce9e--game-creator-retro-gamer.jpg";
-
 		for (let k = 0; k < chatIdsForRemove.length; k++) {
 			if (chats[i].getAttribute("data-peer-id") == chatIdsForRemove[k])
 			{
@@ -17,6 +18,14 @@ function removeElements() {
 	}
 }
 
+function changeChatAvatars(chats){
+	for (let i = 0; i < chats.length; i++) {
+		let avatar = chats[i].getElementsByClassName("avatar")[0];
+		avatar.innerHTML = '<img class="avatar-photo" decoding="async" ' +
+		'src="https://i.pinimg.com/736x/a2/4d/d9/a24dd913965b66c8ff68d53cf899ce9e--game-creator-retro-gamer.jpg">';
+	}
+}
+
 const checkElement = async selector => {
 	while (document.querySelector(selector) === null){
 		await new Promise(resolve => requestAnimationFrame(resolve))
@@ -24,4 +33,4 @@ const checkElement = async selector => {
 	return document.querySelector(selector);
 }
 
-checkElement("#folders-container > div > div.chatlist-top > ul > a:nth-child(3) > div.c-ripple").then((selector) => removeElements())
+checkElement("#folders-container > div > div.chatlist-top > ul > a:nth-child(3) > div.c-ripple").then((selector) => run())
