@@ -2,6 +2,7 @@ function run(){
 	let chats = document.querySelector("#folders-container > div > div.chatlist-top > ul").childNodes;
 	removeChatPreviews(chats);
 	changeChatAvatars(chats);
+	changeChatsBackground();
 }
 
 function removeChatPreviews(chats) {
@@ -19,6 +20,7 @@ function removeChatPreviews(chats) {
 }
 
 function changeChatAvatars(chats){
+	let defaultChatImage = "https://i.pinimg.com/736x/a2/4d/d9/a24dd913965b66c8ff68d53cf899ce9e--game-creator-retro-gamer.jpg";
 	let imageReplacements = {
 		"957483527": "https://i.pinimg.com/564x/e0/9f/e8/e09fe8a8d4f25e12083117f8558df9f4.jpg",
 		"1741221590": "https://i.pinimg.com/736x/cf/59/33/cf5933428ec1997fa4c671e35a400d46.jpg",
@@ -33,10 +35,14 @@ function changeChatAvatars(chats){
 		}
 		else
 		{
-			avatar.innerHTML = '<img class="avatar-photo" decoding="async" ' +
-			'src="https://i.pinimg.com/736x/a2/4d/d9/a24dd913965b66c8ff68d53cf899ce9e--game-creator-retro-gamer.jpg">';
+			avatar.innerHTML = '<img class="avatar-photo" decoding="async" src=' + defaultChatImage + '>';
 		}
 	}
+}
+
+function changeChatsBackground(){
+	let background = document.getElementsByClassName("chat-background")[0];
+	background.innerHTML = '<img src="https://celes.club/uploads/posts/2022-11/1667251345_6-celes-club-p-fon-dlya-chatov-tg-pinterest-6.jpg">';
 }
 
 const checkElement = async selector => {
